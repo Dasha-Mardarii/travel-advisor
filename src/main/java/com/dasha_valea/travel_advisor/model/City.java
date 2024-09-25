@@ -3,6 +3,8 @@ package com.dasha_valea.travel_advisor.model;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.util.List;
+
 @Data
 @Accessors(chain = true)
 public class City {
@@ -13,4 +15,5 @@ public class City {
     private Integer rating;
     // From 1 to 5
     private Integer safetyRating;
+    private List<SightSeeing> seeings;
 }
