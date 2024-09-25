@@ -4,6 +4,7 @@ import com.dasha_valea.travel_advisor.model.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -11,6 +12,26 @@ public class TravelService {
 
     private List<Continent> continents;
 
+    public List<City> findSuitableCities(int minRating, int minSafetyRating, Type preferredSightSeeingType) {
+        List<City> suitableCities = new ArrayList<>();
+
+        for (Continent continent : continents) {
+            for (Country country : continent.getCountries()) {
+                for (City city : country.getCities()) {
+                    boolean meetsCriteria = city.getRating() >= minRating
+                            && city.getSafetyRating() >= minSafetyRating;
+
+                    boolean hasPreferredSightSeeing = city.getSeeings().stream()
+                            .anyMatch(seeing -> seeing.getType() == preferredSightSeeingType);
+
+                    if (meetsCriteria && hasPreferredSightSeeing) {
+                        suitableCities.add(city);
+                    }
+                }
+            }
+        }
+        return suitableCities;
+    }
 
 
     @PostConstruct
