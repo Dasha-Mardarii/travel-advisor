@@ -11,7 +11,3 @@ public class SightSeeing {
     // From 1 to 5
     private Integer rating;
 }
-
-enum Type {
-    MUSEUM, CULTURE, SEE, MOUNTAIN
-}
